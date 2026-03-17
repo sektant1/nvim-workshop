@@ -114,7 +114,7 @@ vim.keymap.set({ 'n', 't' }, '<leader><Tab>', '<Cmd>tabnext<CR>', { desc = 'Vai 
 -- Mapeia do <leader>1 ao <leader>4 para navegar entre as Tabs abertas
 -- (pode mudar o valor caso queira mais tabs) ('which_key_ignore' serve para que o atalho não apareca no menu da leader key)
 for i = 1, 4 do
-  map({ 'n', 't' }, '<leader>' .. i, '<Cmd>tabnext ' .. i .. '<CR>', { desc = 'which_key_ignore' })
+  vim.keymap.set({ 'n', 't' }, '<leader>' .. i, '<Cmd>tabnext ' .. i .. '<CR>', { desc = 'which_key_ignore' })
 end
 
 -- Abre o arquivo no File Explorer
