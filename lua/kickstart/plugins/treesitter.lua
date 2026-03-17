@@ -6,7 +6,8 @@ return {
     lazy = false,
     build = ':TSUpdate',
     branch = 'main',
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
+    -- [[ Configura o Treesitter ]]
+    -- See `:help nvim-treesitter-intro`
     config = function()
       local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
       require('nvim-treesitter').install(parsers)
@@ -17,17 +18,13 @@ return {
           local language = vim.treesitter.language.get_lang(filetype)
           if not language then return end
 
-          -- check if parser exists and load it
+          -- check se a linguagem do file atual exist, se sim, carrega
           if not vim.treesitter.language.add(language) then return end
-          -- enables syntax highlighting and other treesitter features
+
+          -- liga syntax highlighting e outras features
           vim.treesitter.start(buf, language)
 
-          -- enables treesitter based folds
-          -- for more info on folds see `:help folds`
-          -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          -- vim.wo.foldmethod = 'expr'
-
-          -- enables treesitter based indentation
+          -- liga a indentacão automatica com treesitter
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })

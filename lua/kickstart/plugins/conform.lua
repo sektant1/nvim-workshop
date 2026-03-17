@@ -1,10 +1,14 @@
+-- NOTE: Plugins também podem configurar o Autoformat.
+-- O Conform permite configurar formatters externos (como stylua, prettier, etc.)
+-- de maneira fácil e com suporte a salvamento automático.
+
 ---@module 'lazy'
 ---@type LazySpec
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
+    event = { 'BufWritePre' }, -- Executa antes de salvar o arquivo
+    cmd = { 'ConformInfo' }, -- Comando para verificar o status dos formatadores
     keys = {
       {
         '<leader>f',
@@ -18,9 +22,9 @@ return {
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
+        -- Desativa o "format_on_save lsp_fallback" para linguagens que não
+        -- possuem um estilo de codificação bem padronizado. Você pode adicionar
+        -- outras linguagens aqui ou reativar para as que estão desativadas.
         local disable_filetypes = { c = true, cpp = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
@@ -33,11 +37,12 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
+        python = { 'ruff' },
+        -- O Conform também pode executar vários formatadores sequencialmente
         -- python = { "isort", "black" },
         --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- Você pode usar 'stop_after_first' para executar o primeiro formatador disponível da lista
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },

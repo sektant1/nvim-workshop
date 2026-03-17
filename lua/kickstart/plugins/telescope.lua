@@ -1,69 +1,68 @@
--- NOTE: Plugins can specify dependencies.
+-- NOTE: Plugins podem especificar dependências.
 --
--- The dependencies are proper plugin specifications as well - anything
--- you do for a plugin at the top level, you can do for a dependency.
+-- As dependências também são especificações de plugin completas - qualquer coisa
+-- que você faça para um plugin no nível parent, pode fazer para uma child.
 --
--- Use the `dependencies` key to specify the dependencies of a particular plugin
+-- Use `dependencies` para especificar as dependências de um plugin específico.
 
 ---@module 'lazy'
 ---@type LazySpec
 return {
-  { -- Fuzzy Finder (files, lsp, etc)
+  { -- Fuzzy Finder (arquivos, lsp, etc)
     'nvim-telescope/telescope.nvim',
-    -- By default, Telescope is included and acts as your picker for everything.
+    -- Por padrão, o Telescope está incluído e atua como seu picker para tudo.
 
-    -- If you would like to switch to a different picker (like snacks, or fzf-lua)
-    -- you can disable the Telescope plugin by setting enabled to false and enable
-    -- your replacement picker by requiring it explicitly (e.g. 'custom.plugins.snacks')
+    -- Se você quiser mudar para um picker diferente (como snacks ou fzf-lua),
+    -- você pode desativar o plugin Telescope definindo enabled como false e ativar
+    -- o seu picker substituto exigindo-o explicitamente (ex: 'custom.plugins.snacks')
 
-    -- Note: If you customize your config for yourself,
-    -- it’s best to remove the Telescope plugin config entirely
-    -- instead of just disabling it here, to keep your config clean.
+    -- NOTE: Se você customizar sua config,
+    -- é melhor remover a config do plugin Telescope inteiramente
+    -- em vez de apenas desativá-la aqui, para manter sua config limpa.
     enabled = true,
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      { -- Se encontrar erros, veja o README do telescope-fzf-native para instruções de instalação
         'nvim-telescope/telescope-fzf-native.nvim',
 
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
+        -- `build` é usado para executar algum comando quando o plugin é instalado/atualizado.
+        -- Isso é executado apenas nessas ocasiões, não toda vez que o Neovim inicia.
         build = 'make',
 
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
+        -- `cond` é uma condição usada para determinar se este plugin deve ser
+        -- instalado e carregado.
         cond = function() return vim.fn.executable 'make' == 1 end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
-      -- Useful for getting pretty icons, but requires a Nerd Font.
+      -- Útil para ícones, mas requer uma Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
-      -- Telescope is a fuzzy finder that comes with a lot of different things that
-      -- it can fuzzy find! It's more than just a "file finder", it can search
-      -- many different aspects of Neovim, your workspace, LSP, and more!
+      -- O Telescope é um fuzzy finder que vem com muitas coisas diferentes que
+      -- ele pode encontrar via fuzzy find!
+      -- ele pode pesquisar muitos aspectos diferentes do Neovim, seu workspace, LSP e mais!
       --
-      -- The easiest way to use Telescope, is to start by doing something like:
+      -- A maneira mais fácil de usar o Telescope é começar fazendo algo como:
       --  :Telescope help_tags
       --
-      -- After running this command, a window will open up and you're able to
-      -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
+      -- Após executar este comando, uma janela abrirá e você poderá digitar na
+      -- janela de prompt. Você verá uma lista de opções de `help_tags` e uma
+      -- pré-visualização correspondente da ajuda.
       --
-      -- Two important keymaps to use while in Telescope are:
-      --  - Insert mode: <c-/>
+      -- Dois keymaps importantes para usar enquanto estiver no Telescope são:
+      --  - Insert mode: <C-/>
       --  - Normal mode: ?
       --
-      -- This opens a window that shows you all of the keymaps for the current
-      -- Telescope picker. This is really useful to discover what Telescope can
-      -- do as well as how to actually do it!
+      -- Isso abre uma janela que mostra todos os keymaps para o picker atual do Telescope.
+      -- Isso é muito útil para descobrir o que o Telescope pode fazer e como fazê-lo!
 
-      -- [[ Configure Telescope ]]
-      -- See `:help telescope` and `:help telescope.setup()`
+      -- [[ Configura o Telescope ]]
+      -- Veja `:help telescope` e `:help telescope.setup()`
       require('telescope').setup {
-        -- You can put your default mappings / updates / etc. in here
-        --  All the info you're looking for is in `:help telescope.setup()`
+        -- Você pode colocar seus mappings padrão / atualizações / etc. aqui
+        -- Todas as informações estão em `:help telescope.setup()`
         --
         -- defaults = {
         --   mappings = {
@@ -76,84 +75,78 @@ return {
         },
       }
 
-      -- Enable Telescope extensions if they are installed
+      -- Ativa extensões do Telescope se estiverem instaladas
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
-      -- See `:help telescope.builtin`
+      -- Veja `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', 'sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+      vim.keymap.set('n', 'sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      vim.keymap.set('n', 'sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', 'ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set({ 'n', 'v' }, 'sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', 'sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', 'sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', 'sr', builtin.resume, { desc = '[S]earch [R]esume' })
+      vim.keymap.set('n', 's.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
+      vim.keymap.set('n', 'sc', builtin.commands, { desc = '[S]earch [C]ommands' })
+      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Localizar buffers existentes' })
 
-      -- This runs on LSP attach per buffer (see main LSP attach function in 'neovim/nvim-lspconfig' config for more info,
-      -- it is better explained there). This allows easily switching between pickers if you prefer using something else!
+      -- Isso é executado no LspAttach por buffer (veja a função principal de attach do LSP
+      -- na config de 'neovim/nvim-lspconfig' para mais info).
+      -- Isso permite alternar facilmente entre pickers se preferir usar outra coisa!
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
         callback = function(event)
           local buf = event.buf
 
-          -- Find references for the word under your cursor.
+          -- Encontra referências para a palavra sob o cursor.
           vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
 
-          -- Jump to the implementation of the word under your cursor.
-          -- Useful when your language has ways of declaring types without an actual implementation.
+          -- Pula para a implementação da palavra sob o cursor.
           vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
 
-          -- Jump to the definition of the word under your cursor.
-          -- This is where a variable was first declared, or where a function is defined, etc.
-          -- To jump back, press <C-t>.
+          -- Pula para a definição da palavra sob o cursor.
+          -- Para voltar, pressione <C-t>.
           vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
 
-          -- Fuzzy find all the symbols in your current document.
-          -- Symbols are things like variables, functions, types, etc.
+          -- Busca via fuzzy find todos os símbolos no documento atual.
           vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
 
-          -- Fuzzy find all the symbols in your current workspace.
-          -- Similar to document symbols, except searches over your entire project.
+          -- Busca via fuzzy find todos os símbolos no seu workspace atual.
           vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Open Workspace Symbols' })
 
-          -- Jump to the type of the word under your cursor.
-          -- Useful when you're not sure what type a variable is and you want to see
-          -- the definition of its *type*, not where it was *defined*.
+          -- Pula para a definição de tipo da palavra sob o cursor.
           vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
         end,
       })
 
-      -- Override default behavior and theme when searching
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+      -- Sobrescreve o comportamento padrão e tema ao pesquisar no buffer atual
+      vim.keymap.set('n', '/', function()
+        -- Você pode passar configurações adicionais ao Telescope para mudar o tema, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      end, { desc = '[/] Busca via fuzzy find no buffer atual' })
 
-      -- It's also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      -- Também é possível passar opções de configuração adicionais.
+      -- Veja `:help telescope.builtin.live_grep()` para informações sobre chaves específicas
       vim.keymap.set(
         'n',
-        '<leader>s/',
+        's/',
         function()
           builtin.live_grep {
             grep_open_files = true,
-            prompt_title = 'Live Grep in Open Files',
+            prompt_title = 'Live Grep em Arquivos Abertos',
           }
         end,
-        { desc = '[S]earch [/] in Open Files' }
+        { desc = '[S]earch [/] em Arquivos Abertos' }
       )
 
-      -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+      -- Atalho para pesquisar seus arquivos de configuração do Neovim
+      vim.keymap.set('n', 'sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

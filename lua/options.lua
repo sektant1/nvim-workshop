@@ -3,70 +3,71 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- Make line numbers default
+-- Mostra o número da linha
 vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
+
+-- Também existe a opcão de `relative line number`, que ajuda em comandos onde é preciso saltar X numero de linhas.
 -- vim.o.relativenumber = true
 
--- Enable mouse mode, can be useful for resizing splits for example!
+-- Habilita o mouse dentro neovim, util para ajustar os splits e interagir com a UI
 vim.o.mouse = 'a'
 
--- Don't show the mode, since it's already in the status line
+-- Isso esconde o `--INSERT--` quando entramos no INSERT mode,
+-- como a nossa configuracao ja adiciona na STATUS BAR o modo que estamos, faz sentido desligarmos essa opt
 vim.o.showmode = false
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
+-- Sincroniza a clipboard do OS com a do NEOVIM
+--  No neovim por padrão o buffer do clipboard é separado entre OS/NEOVIM,
+--  e pra que fique mais fácil agora de comeco, deixamos ambas no mesmo BUFFER
+--  ex: no neovim, quando deletamos alguma linha/palavra/character, ela vai pro buffer da clipboard, então se usarmos a keybind 'p'(de 'paste') no modo NORMAL,
+--    a ultima coisa que deletamos, ou como nesse caso, copiamos fora ou dentro do vim, ira ser colada(paste) no local do cursor.
+--  `:help 'clipboard'`
 vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
--- Enable break indent
+-- Mantem a indentacão quando quebramos uma linha
 vim.o.breakindent = true
 
--- Enable undo/redo changes even after closing and reopening a file
+-- Mantém o histórico de 'Desfazer' (Undo) mesmo após fechar e reabrir o neovim
+-- u = undo (desfazer)
+-- <C-r> = redo (refazer)
 vim.o.undofile = true
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+-- Desabilita o arquivo temporario
+vim.o.swapfile = false
+
+-- Pesquisa insensível a maiusc/minusc, porem se na buscar tiver maiusc: ignore case = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
+-- Mostra a coluna de sinais(erros, warnings, git signs etc) sempre que possivel
 vim.o.signcolumn = 'yes'
 
--- Decrease update time
+-- Diminui tempo de atualizacao do neovim, melhora a quality of life em geral
 vim.o.updatetime = 250
 
--- Decrease mapped sequence wait time
+-- Diiminui o tempo de espera pras keybinds
 vim.o.timeoutlen = 300
 
--- Configure how new splits should be opened
+-- Define como que os splits irão abrir, direita depois abaixo
 vim.o.splitright = true
 vim.o.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
+-- Mostra caracteres invisíveis (tabs e spaces)
 --  See `:help 'list'`
 --  and `:help 'listchars'`
---
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-guide-options`
 vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
+-- Preview dos comandos enquanto escreve
 vim.o.inccommand = 'split'
 
--- Show which line your cursor is on
+-- Mostra em qual linha o cursor está
 vim.o.cursorline = true
 
--- Minimal number of screen lines to keep above and below the cursor.
+-- Número mínimo de linhas abaixo do cursor para o scroll da tela ser ativado
 vim.o.scrolloff = 10
 
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
+-- Confirmacão ao tentar sair sem salvar (:w ou <leader>w) o arquivo atual
 vim.o.confirm = true
 
 -- vim: ts=2 sts=2 sw=2 et

@@ -1,21 +1,20 @@
--- [[ Configure and install plugins ]]
+-- [[ Configura e instala os plugins ]]
 --
---  To check the current status of your plugins, run
+--  Para verificiar, atualizar ou remover plugins:
 --    :Lazy
 --
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
+--  Para so atualizar:
 --    :Lazy update
 --
--- NOTE: Here is where you install your plugins.
+-- NOTE: Aqui é onde você instala os seus plugins.
 require('lazy').setup({
-  -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
+  -- NOTE: Plugins podem ser adicionas com github org/name. Para rodar o setup automatico do plugin, use `opts = {}`
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
-  -- modular approach: using `require 'path.name'` will
-  -- include a plugin definition from file lua/path/name.lua
+  -- Como esse repo é modular, você carrega os arquivos de plugin assim: using `require 'path.name'`
+  -- isso vai incluir o plugin do path usado, ex: 'lua/custom/plugin_name.lua' ficaria assim: require 'custom.plugin_name'
 
+  -- Abaixo estão os plugins padrões do kickstart (lua/kickstart/plugins/*)
   require 'kickstart.plugins.gitsigns',
 
   require 'kickstart.plugins.which-key',
@@ -36,35 +35,26 @@ require('lazy').setup({
 
   require 'kickstart.plugins.treesitter',
 
-  -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
+  -- Abaixo estão plugins opcionais que você pode habilitar apenas descomentando a linha (tip: keybind 'gcc' pra comentar/descomentar uma linha)
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
+  -- NOTE: O import abaixo adiciona os plugins, configs, etc automaticamente de: `lua/custom/plugins/*.lua`
+  --    Esse é o jeito mais prático de modularizar sua config do neovim.
   --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  --  adicione seus plugins em `lua/custom/plugins/*.lua` e eles serão instalados automaticamente.
+  --  o arquivo `lua/custom/plugins/init.lua` é um exemplo de como adicionar mais plugins
+  { import = 'custom.plugins' },
   --
-  -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
-  -- Or use telescope!
-  -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
-  -- you can continue same window with `<space>sr` which resumes last telescope search
+  --
+  -- Abaixo sao os icones de fallback caso não use uma nerdfont
+  --
 }, { ---@diagnostic disable-line: missing-fields
   ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
       config = '🛠',
