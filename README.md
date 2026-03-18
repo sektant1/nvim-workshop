@@ -29,19 +29,19 @@ sudo apt install neovim
 Requisitos:
 - Utilitários básicos: `git`, `make`, `unzip`, C Compiler (`gcc`), `ripgrep`, `fd-find`
 ```sh
-  sudo apt install git make unzip gcc ripgrep fd-find`
+  sudo apt install git make unzip gcc ripgrep fd-find
 ```
 
 - [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md#installation)
 ```sh
-  npm install -g tree-sitter-cli`
+  npm install -g tree-sitter-cli
 ```
 
 - Uma [Nerd Font](https://www.nerdfonts.com/): opcional, fornece diversos ícones
   - se você a tiver, defina `vim.g.have_nerd_font` em `init.lua` como **true**
 - Fontes de Emoji (apenas Ubuntu, e somente se você quiser emoji!) 
 ```sh
-sudo apt install fonts-noto-color-emoji`
+sudo apt install fonts-noto-color-emoji
 ```
 
 - Configuração de Linguagem:
