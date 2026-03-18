@@ -95,4 +95,4 @@ Abra o Neovim
 nvim
 ```
 
-E pronto, Lazy vai instalar todos os plugins que você colocou na `lua/custom/plugins` + os plugins padrão do kickstart em `lua/kickstart/plugins`. Use `:Lazy` pra ver os plugins instalados e gerenciar os mesmos. Use `q` pra fechar a janela do Lazy.
+E pronto, Lazy vai instalar todos os plugins que você colocou na `lua/custom/plugins/*.lua` + plugins padrão do kickstart de `lua/kickstart/plugins/*.lua`. Use `:Lazy` pra ver os plugins instalados e gerenciar os mesmos. Use `q` pra fechar a janela do Lazy.
