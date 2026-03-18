@@ -5,7 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Caso você tenha uma nerd font instalada no terminal, pode setar como true
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Opcões ]]
 require 'options'

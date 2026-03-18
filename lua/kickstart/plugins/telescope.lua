@@ -81,17 +81,17 @@ return {
 
       -- Veja `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
-      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Localizar buffers existentes' })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Help' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
+      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
+      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
+      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
+      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files' })
+      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Search Commands' })
+      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Search Opened Buffers' })
 
       -- Isso é executado no LspAttach por buffer (veja a função principal de attach do LSP
       -- na config de 'neovim/nvim-lspconfig' para mais info).
@@ -102,14 +102,14 @@ return {
           local buf = event.buf
 
           -- Encontra referências para a palavra sob o cursor.
-          vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
+          vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = 'Goto References' })
 
           -- Pula para a implementação da palavra sob o cursor.
-          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
+          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = 'Goto Implementation' })
 
           -- Pula para a definição da palavra sob o cursor.
           -- Para voltar, pressione <C-t>.
-          vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+          vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = 'Goto Definition' })
 
           -- Busca via fuzzy find todos os símbolos no documento atual.
           vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
@@ -118,7 +118,7 @@ return {
           vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Open Workspace Symbols' })
 
           -- Pula para a definição de tipo da palavra sob o cursor.
-          vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+          vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = 'Goto Type Definition' })
         end,
       })
 
@@ -129,7 +129,7 @@ return {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Busca via fuzzy find no buffer atual' })
+      end, { desc = 'Search fuzzy find no buffer atual' })
 
       -- Também é possível passar opções de configuração adicionais.
       -- Veja `:help telescope.builtin.live_grep()` para informações sobre chaves específicas
@@ -142,11 +142,11 @@ return {
             prompt_title = 'Live Grep em Arquivos Abertos',
           }
         end,
-        { desc = '[S]earch [/] em Arquivos Abertos' }
+        { desc = 'Search grep em Arquivos Abertos' }
       )
 
       -- Atalho para pesquisar seus arquivos de configuração do Neovim
-      vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+      vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = 'Search Neovim files' })
     end,
   },
 }

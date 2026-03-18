@@ -61,15 +61,15 @@ return {
 
           -- Renomear a variável sob o cursor (Rename).
           -- A maioria dos servidores LSP suporta renomeação em múltiplos arquivos, etc.
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('grn', vim.lsp.buf.rename, 'Rename')
 
           -- Executa uma Code Action (Ação de Código), geralmente o cursor precisa estar sobre
           -- um erro ou uma sugestão do LSP para que isso seja ativado.
-          map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('gra', vim.lsp.buf.code_action, 'Goto Code Action', { 'n', 'x' })
 
           -- AVISO: Isto não é Goto Definition, isto é Goto Declaration.
           -- Por exemplo, em C, isso levaria você para o arquivo de header (.h).
-          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('grD', vim.lsp.buf.declaration, 'Goto Declaration')
 
           -- Os dois autocomandos seguintes são usados para destacar (highlight) referências da
           -- palavra sob o seu cursor quando ele para por um curto período.
@@ -103,8 +103,18 @@ return {
           -- O código seguinte cria um atalho para alternar Inlay Hints (Dicas em linha)
           -- no seu código, se o servidor de linguagem que você está usando as suportar.
           if client and client:supports_method('textDocument/inlayHint', event.buf) then
-            map('th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Toggle Inlay Hints')
           end
+
+          vim.keymap.set('n', '<leader>tl', function()
+            local new_config = not vim.diagnostic.config().virtual_lines
+            vim.diagnostic.config { virtual_lines = new_config }
+          end, { desc = 'Toggle Diagnostic Virtual Lines' })
+
+          vim.keymap.set('n', '<leader>tt', function()
+            local cfg = vim.diagnostic.config()
+            vim.diagnostic.config { virtual_text = not cfg.virtual_text }
+          end, { desc = 'Toggle Diagnostic Virtual Text' })
         end,
       })
 
@@ -116,7 +126,14 @@ return {
         -- clangd = {},
         -- gopls = {},
         pyright = {},
+        basedpyright = {},
+        ruff = {},
+        vtsls = {},
+        html = {},
+        cssls = {},
+        jsonls = {},
         ts_ls = {},
+        marksman = {},
         -- rust_analyzer = {},
 
         stylua = {}, -- Usado para formatar código Lua
@@ -156,8 +173,17 @@ return {
       vim.list_extend(ensure_installed, {
         -- Você pode adicionar outras ferramentas aqui (formatadores, linters, etc)
         'pyright',
+        'basedpyright',
+        'ruff',
         'ts_ls',
+        'eslint_d',
+        'pylint',
+        'debugpy',
         'lua_ls',
+        'marksman',
+        'markdown-toc',
+        'prettier',
+        'prettierd',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }

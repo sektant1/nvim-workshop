@@ -6,6 +6,7 @@
 ---@type LazySpec
 
 -- Como exemplo, vou adicionar o plugin 'VimBeGood' que adiciona mini-games pra aprender/treinar comandos do vim
+-- use o comando ':VimBeGood' pra abrir
 return {
   -- exeplo: { 'github org or username/repo-name' },
   { 'ThePrimeagen/vim-be-good' },

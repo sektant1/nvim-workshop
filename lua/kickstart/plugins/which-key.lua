@@ -31,9 +31,10 @@ return {
 
       -- Cria grupos de keybinds existentes (prefixos)
       spec = {
-        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>s', group = 'Search', mode = { 'n', 'v' } },
+        { '<leader>b', group = 'Debug', mode = { 'n', 'v' } },
+        { '<leader>t', group = 'Toggle' },
+        { '<leader>h', group = 'Git Hunk', mode = { 'n', 'v' } },
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },

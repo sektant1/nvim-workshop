@@ -20,8 +20,9 @@ return {
   opts = {
     filesystem = {
       window = {
+        width = 30,
         mappings = {
-          ['\\'] = 'close_window',
+          ['<leader>e'] = 'close_window',
         },
       },
     },

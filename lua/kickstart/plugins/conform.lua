@@ -14,7 +14,7 @@ return {
         '<leader>f',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = 'Format file',
       },
     },
     ---@module 'conform'
@@ -37,12 +37,15 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'ruff' },
         -- O Conform também pode executar vários formatadores sequencialmente
-        -- python = { "isort", "black" },
-        --
+        -- Adiciona JS/TS:
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        -- Adiciona Python:
+        python = { 'isort', 'black' },
         -- Você pode usar 'stop_after_first' para executar o primeiro formatador disponível da lista
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },

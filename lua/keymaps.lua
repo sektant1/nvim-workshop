@@ -43,22 +43,23 @@ vim.diagnostic.config {
 
 vim.keymap.set('n', '<C-q>', ':copen<CR>', { silent = true }) -- Abre a quickfix list padrão do neovim
 
-vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Abre a lista de [D]iagnóstico' })
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Mostra a janela de diagnóstico no cursor' })
+vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Diagnostics list' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Diagnostics on current word' })
 
 -- Keybinds para facilitar salvar arquivos e sair/fechar neovim
 -- :w = salva o arquivo atual
 -- :q = fechar neovim
 -- :q! = fechar neovim ignorando arquivos não salvos
 -- :wq = salva arquivo e fecha o neovim
-vim.keymap.set('n', '<leader>w', '<Cmd>update<CR>', { desc = ':write(salva) arquivo atual' })
-vim.keymap.set('n', '<leader>q', '<Cmd>quit<CR>', { desc = ':quit' })
+vim.keymap.set('n', '<leader>w', '<Cmd>update<CR>', { desc = 'Save file' })
+
+vim.keymap.set('n', '<leader>q', '<Cmd>quit<CR>', { desc = 'Quit' })
 
 -- Sai do TERMINAL MODE de maneira mais fácil
 -- Por padrão, você normalmente usa <C-\><C-n>
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- DICA: Disabilita as arrow keys para aprender/acostumar a usar HJKL para movimentar
+-- DICA: Desabilita as arrow keys para aprender/acostumar a usar HJKL para movimentar
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
@@ -90,9 +91,9 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 -- Keybinds para melhorar o copy/delete
-vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Yank para o clipboard do OS' })
-vim.keymap.set({ 'n', 'x' }, '<leader>D', '"+d', { desc = 'Delete para o clipboard do OS' })
-vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', '"+y', { desc = 'Yank para clipboard do OS' }) -- VISUAL Mode
+-- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Yank' })
+-- vim.keymap.set({ 'n', 'x' }, '<leader>D', '"+d', { desc = 'Delete' })
+vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', '"+y', { desc = 'Yank' }) -- VISUAL Mode
 vim.keymap.set('n', 'Y', 'y$', { desc = 'Yank do cursor até o final da linha' })
 vim.keymap.set('n', 'D', 'd$', { desc = 'Delete do cursor até o final da linha' })
 
@@ -106,10 +107,10 @@ vim.keymap.set('n', 'o', "<cmd>:call append(line('.'), '')<CR>")
 vim.keymap.set('n', 'O', "<cmd>:call append(line('.')-1, '')<CR>")
 
 -- tabs
-vim.keymap.set({ 'n', 't' }, '<leader>n', '<Cmd>tabnew<CR>', { desc = 'Cria nova Tab' })
-vim.keymap.set({ 'n', 't' }, '<leader>x', '<Cmd>tabclose<CR>', { desc = 'Fecha Tab atual' })
-vim.keymap.set({ 'n', 't' }, '<leader><S-Tab>', '<Cmd>tabprevious<CR>', { desc = 'Vai pra Tab anterior' })
-vim.keymap.set({ 'n', 't' }, '<leader><Tab>', '<Cmd>tabnext<CR>', { desc = 'Vai pra proxima Tab' })
+vim.keymap.set({ 'n', 't' }, '<leader>n', '<Cmd>tabnew<CR>', { desc = 'New Tab' })
+vim.keymap.set({ 'n', 't' }, '<leader>x', '<Cmd>tabclose<CR>', { desc = 'Close Tab' })
+vim.keymap.set({ 'n', 't' }, '<leader><S-Tab>', '<Cmd>tabprevious<CR>', { desc = 'Previous Tab' })
+vim.keymap.set({ 'n', 't' }, '<leader><Tab>', '<Cmd>tabnext<CR>', { desc = 'Next Tab' })
 
 -- Mapeia do <leader>1 ao <leader>4 para navegar entre as Tabs abertas
 -- (pode mudar o valor caso queira mais tabs) ('which_key_ignore' serve para que o atalho não apareca no menu da leader key)
@@ -118,7 +119,7 @@ for i = 1, 4 do
 end
 
 -- Abre o arquivo no File Explorer
-vim.keymap.set('n', '<C-f>', '<Cmd>Open .<CR>', { desc = 'Abre arquivo no OS Finder' })
+vim.keymap.set('n', '<C-f>', '<Cmd>Open .<CR>', { desc = 'Open in OS Finder' })
 
 -- [[ Auto comandos ]]
 -- São comandos/funcoes que são executadas automanticamente quando X situacão acontece
