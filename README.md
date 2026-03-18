@@ -2,13 +2,15 @@
 
 ## Introdução
 
-*Este é um fork de [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) que move de um único arquivo para uma configuração com múltiplos arquivos.*
+*Este é um fork do [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) que move de um único arquivo para uma configuração com múltiplos arquivos.*
 
-Um ponto de partida para aprender Neovim que é:
+Um ponto de partida pra aprender Neovim que é:
 
-* Pequeno o suficiente pra tu deixar do jeito que quer
+* Pequeno
+* Simples de customizar
+* Pronto pra uso
 * Modular
-* Completamente Documentado
+* Documentado
 
 **NÃO** é uma distribuição Neovim, mas sim um ponto de partida para sua configuração. 
 
@@ -22,9 +24,9 @@ sudo apt update
 sudo apt install neovim
 ```
 
-### Instalar Dependências Externas
+### Instalar Dependências
 
-Requisitos Externos:
+Requisitos:
 - Utilitários básicos: `git`, `make`, `unzip`, C Compiler (`gcc`), `ripgrep`, `fd-find`
 ```sh
   sudo apt install git make unzip gcc ripgrep fd-find`
@@ -43,15 +45,15 @@ sudo apt install fonts-noto-color-emoji`
 ```
 
 - Configuração de Linguagem:
-  - Se você quer escrever em Typescript, você precisa de `npm`
-  - Se você quer escrever em Golang, você precisará de `go`
+  - Se você quer codar em Typescript, precisa de `npm`
+  - Se você quer codar em Golang, precisa de `go`
   - etc.
 
 > [!NOTE]
 > Veja [Install Recipes](#Install-Recipes) para notas adicionais específicas do Windows e Linux
-> e snippets de instalação rápida
+> e snippets de instalação
 
-### Instalar Kickstart
+### Instalar o Kickstart CERTI
 
 > [!NOTE]
 > [Faça backup](#FAQ) da sua configuração anterior (se houver)
