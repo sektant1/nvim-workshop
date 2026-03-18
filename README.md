@@ -61,10 +61,38 @@ As configurações do Neovim estão localizadas nesses paths, dependendo do seu 
 | Windows (cmd)| `%localappdata%\nvim\` |
 | Windows (powershell)| `$env:LOCALAPPDATA\nvim\` |
 
-#### Clonar kickstart.nvim
+#### Clonar o repo
 
 <details><summary> Linux e Mac </summary>
 
 ```sh
 git clone https://github.com/sektant1/nvim-workshop.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
+
+</details>
+
+<details><summary> Windows </summary>
+
+Caso use `cmd.exe`:
+
+```
+git clone https://github.com/sektant1/nvim-workshop.git "%localappdata%\nvim"
+```
+
+Caso use `powershell.exe`:
+
+```
+git clone https://github.com/sektant1/nvim-workshop.git "${env:LOCALAPPDATA}\nvim"
+```
+
+</details>
+
+### Post-Install
+
+Abra o Neovim
+
+```sh
+nvim
+```
+
+E pronto, Lazy vai instalar todos os plugins que você colocou na `lua/custom/plugins` + os plugins padrão do kickstart em `lua/kickstart/plugins`. Use `:Lazy` pra ver os plugins instalados e gerenciar os mesmos. Use `q` pra fechar a janela do Lazy.
