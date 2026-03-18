@@ -1,4 +1,4 @@
-# kickstart-modular.nvim
+# kickstart-certi-workshop
 
 ## Introdução
 
