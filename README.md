@@ -75,13 +75,13 @@ git clone https://github.com/sektant1/nvim-workshop.git "${XDG_CONFIG_HOME:-$HOM
 
 Caso use `cmd.exe`:
 
-```
+```sh
 git clone https://github.com/sektant1/nvim-workshop.git "%localappdata%\nvim"
 ```
 
 Caso use `powershell.exe`:
 
-```
+```sh
 git clone https://github.com/sektant1/nvim-workshop.git "${env:LOCALAPPDATA}\nvim"
 ```
 
@@ -147,6 +147,7 @@ Depois de salvar o arquivo `autopairs.lua`:
 
   - Feche o Neovim e abra-o novamente.
 
-  - O `lazy.nvim` vai detectar automaticamente o novo arquivo, baixar o plugin e instalar (em UNIX, os plugins ficam instalados em `~/.local/share/nvim/...`).
+  - O `lazy.nvim` vai detectar automaticamente o novo arquivo, baixar o plugin e instalar.
+    - Caso tenha curisidade, em UNIX os plugins ficam instalados em `~/.local/share/nvim/lazy/*`.
 
   - Você pode digitar `:Lazy` no modo normal para abrir o painel do lazy e ver se o plugin está na lista de instalados.
