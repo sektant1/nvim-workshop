@@ -12,7 +12,7 @@ Um ponto de partida pra aprender Neovim que é:
 * Modular
 * Documentado
 
-**NÃO** é uma distribuição Neovim, mas sim um ponto de partida para sua configuração. 
+**NÃO** é uma distro Neovim, mas sim um ponto de partida para sua configuração. 
 
 ## Instalação
 
@@ -39,26 +39,21 @@ Requisitos:
 
 - Uma [Nerd Font](https://www.nerdfonts.com/): opcional, fornece diversos ícones
   - se você a tiver, defina `vim.g.have_nerd_font` em `init.lua` como **true**
-- Fontes de Emoji (apenas Ubuntu, e somente se você quiser emoji!) 
+  
+- Fontes de Emoji (apenas Ubuntu, e somente se você quiser emoji) 
 ```sh
 sudo apt install fonts-noto-color-emoji
 ```
 
 - Configuração de Linguagem:
-  - Se você quer codar em Typescript, precisa de `npm`
-  - Se você quer codar em Golang, precisa de `go`
+  - Se você quer codar em Typescript, precisa de `npm`...
+  - Se você quer codar em Python, precisa de `pip`, `venv`...
+  - Se você quer codar em C/C++, precisa de `clang`...
   - etc.
-
-> [!NOTE]
-> Veja [Install Recipes](#Install-Recipes) para notas adicionais específicas do Windows e Linux
-> e snippets de instalação
 
 ### Instalar o Kickstart CERTI
 
-> [!NOTE]
-> [Faça backup](#FAQ) da sua configuração anterior (se houver)
-
-As configurações do Neovim estão localizadas nos seguintes caminhos, dependendo do seu OS:
+As configurações do Neovim estão localizadas nesses paths, dependendo do seu OS:
 
 | OS | PATH |
 | :- | :--- |
